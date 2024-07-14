@@ -35,13 +35,6 @@ const departments = [
 // Expected Output:
 // [{ "Engineering": 170000 }, { "Marketing": 125000 }]
 
-// console.log(
-//   departments.reduce((accumulator,department) =>
-//     departments.employees.reduce((acc, employ) => acc + employ.salary, 0)
-//   return accumulator ,0
-//   )
-
-// );
 const result = departments.reduce((accumulator, department) => {
   const departmentName = department.name;
   const departmentSalary = department.employees.reduce(
@@ -148,8 +141,395 @@ console.log(
 ); // converted to string
 
 console.log(
-  [1, 7, 151, 3, 10, 5, 4].reduce(
+  [1, 7, 3, 10, 5, 4].reduce(
     (acc, curr) => (curr % 2 == 0 ? acc.concat(curr) : acc),
     []
   )
 ); // Filtering even numbers
+
+console.log("\n\nNew TASKS");
+// Q1. Implement getUserAge function
+const userData = {
+  user: {
+    profile: {
+      name: "Alice",
+      age: null,
+    },
+  },
+};
+
+function getUserAge(userData) {
+  return userData?.user?.profile?.age ?? "Age not provided";
+}
+
+console.log(getUserAge(userData)); // Should print: Age not provided
+console.log(getUserAge({ user: { profile: { age: 25 } } })); // Should print: 25
+console.log(getUserAge({ user: {} })); // Should print: Age not provided
+
+// Q2. Write a function that returns a new array with an
+// additional skill for each employee
+
+const employees = [
+  {
+    id: 1,
+    name: "Alice",
+    position: "Developer",
+    skills: ["JavaScript", "React"],
+  },
+  {
+    id: 2,
+    name: "Bob",
+    position: "Manager",
+    skills: ["Leadership", "Communication"],
+  },
+  { id: 3, name: "Charlie", position: "CEO", skills: ["Strategy", "Vision"] },
+];
+
+function addSkill(employees, newSkill) {
+  const result = employees.reduce(
+    (acc, curr) => acc.concat(...employees, curr.skills.push(newSkill)),
+    []
+  );
+  return result;
+}
+
+// console.log(addSkill(employees, "Problem Solving"));
+// console.log(employees)
+// Should print:
+// [
+//   { id: 1, name: "Alice", position: "Developer", skills: ["JavaScript", "React", "Problem Solving"] },
+//   { id: 2, name: "Bob", position: "Manager", skills: ["Leadership", "Communication", "Problem Solving"] },
+//   { id: 3, name: "Charlie", position: "CEO", skills: ["Strategy", "Vision", "Problem Solving"] }
+// ]
+
+// Q3. Find the total price of all products using arrow functions and array methods
+// - Implement getTotalPrice
+const productss = [
+  { id: 1, name: "Laptop", price: 1000 },
+  { id: 2, name: "Phone", price: 500 },
+  { id: 3, name: "Tablet", price: 700 },
+];
+
+const getTotalPrice = (products) => {
+  return products.reduce((acc, product) => (acc += product.price), 0);
+};
+
+console.log(getTotalPrice(productss)); // Should print: 2200
+
+// Q4: Write a function that extracts the user's name and theme, providing
+// default values if they are missing
+const userProfile = {
+  id: 1,
+  name: "Eve",
+  settings: {
+    theme: "dark",
+  },
+};
+
+const getUserSettings = (userProfile) => {
+  return `${userProfile.name} prefers the ${
+    userProfile?.settings?.theme ?? "light theme"
+  }`;
+};
+
+console.log(getUserSettings(userProfile)); // Should print: Eve prefers the dark theme
+console.log(getUserSettings({ id: 2, name: "Adam" })); // Should print: Adam prefers the light theme
+
+// Q5: Write a function that takes a user object and returns a message indicating
+// if the user is active or not
+const user1 = { name: "Jane", active: true };
+const user2 = { name: "John", active: false };
+
+const getUserStatus = (user) =>
+  `${user.name} is currently ${user.active ? "active" : "inactive"}`;
+
+console.log(getUserStatus(user1)); // Should print: Jane is currently active
+console.log(getUserStatus(user2)); // Should print: John is currently inactive
+
+// Q6: Write a function that returns the user's age if available, or a default message
+// if not, using nullish coalescing and optional chaining
+const userWithFullProfile = {
+  id: 1,
+  name: "Alice",
+  profile: {
+    age: 25,
+    address: {
+      city: "Wonderland",
+      zip: "12345",
+    },
+  },
+};
+
+const userWithPartialProfile = {
+  id: 2,
+  name: "Bob",
+  profile: {
+    age: null,
+  },
+};
+
+const getUserAgee = (user) => `${user?.profile?.age ?? "Age not provided"}`;
+
+console.log(getUserAgee(userWithFullProfile)); // Should print: 25
+console.log(getUserAgee(userWithPartialProfile)); // Should print: Age not provided
+console.log(getUserAgee({ id: 3, name: "Charlie" })); // Should print: Age not provided
+
+// Q7: Write a function that generates a summary string for the top scorer
+// using template literals and array methods
+const scores = [
+  { name: "Alice", score: 90 },
+  { name: "Bob", score: 85 },
+  { name: "Charlie", score: 92 },
+];
+
+const getTopScorer = (scores) => {
+  const top = scores.reduce((acc, curr) => {
+    acc = acc.score > curr.score ? acc : curr;
+    return acc;
+  }, 0);
+  return `${top.name} is the top scorer with a score of ${top.score}`;
+};
+
+console.log(getTopScorer(scores)); // Should print: Charlie is the top scorer with a score of 92.
+
+// Q8: Create a function that returns a greeting message based on the time of day
+// Ex26 - Create a function that returns a greeting message based on the time of day
+function greet(name) {
+  const hour = new Date().getHours();
+  return `Good ${
+    hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening"
+  }, ${name}!`;
+}
+
+console.log(greet("Pandu")); // Good morning, Alice! (If the time 10am)
+// console.log(greet("Pandu")); // Good afternoon, Alice! (If the time 1pm)
+// console.log(greet("Pandu")); // Good evening, Alice! (If the time 7pm)
+
+// Q9: Write a function that returns the name of a user's first friend
+// using nested destructuring
+const userss1 = [
+  { id: 1, name: "Alice", friends: [{ name: "Bob" }, { name: "Charlie" }] },
+  { id: 2, name: "David", friends: [{ name: "Eve" }, { name: "Frank" }] },
+  { id: 4, name: "Deepak", friends: [] },
+];
+
+function getFirstFriendName(num) {
+  const [user] = userss1.filter((u) => u.id === num);
+  if (!user) {
+    return "User not found";
+  }
+
+  if (user.friends.length === 0) {
+    return `${user.name} has no friends 🥲`;
+  }
+
+  return user.friends[0].name;
+}
+
+console.log(getFirstFriendName(1)); // Should print: Bob
+console.log(getFirstFriendName(2)); // Should print: Eve
+console.log(getFirstFriendName(3)); // Should print: User not found
+console.log(getFirstFriendName(4)); // Should print: Deepak has no friends 🥲
+
+const movies = [
+  {
+    id: 1,
+    title: "Baahubali",
+    director: "S. S. Rajamouli",
+    year: 2015,
+    ratings: [8, 9, 10],
+    genre: "Action",
+  },
+  {
+    id: 2,
+    title: "Arjun Reddy",
+    director: "Sandeep Reddy Vanga",
+    year: 2017,
+    ratings: [9, 8, 9],
+    genre: "Drama",
+  },
+  {
+    id: 3,
+    title: "Mahanati",
+    director: "Nag Ashwin",
+    year: 2018,
+    ratings: [10, 9, 8],
+    genre: "Biography",
+  },
+  {
+    id: 4,
+    title: "Eega",
+    director: "S. S. Rajamouli",
+    year: 2012,
+    ratings: [7, 8, 9],
+    genre: "Fantasy",
+  },
+  {
+    id: 5,
+    title: "Jersey",
+    director: "Gowtam Tinnanuri",
+    year: 2019,
+    ratings: [9, 9, 8],
+    genre: "Sports",
+  },
+];
+
+// Q10. Write a function that finds a movie by id and returns its title and
+// genre in a formatted string
+function getMovieDetails(num) {
+  const [movie] = movies.filter((u) => u.id === num);
+  return movie ? `${movie.title} is a ${movie.genre} movie` : "Movie not found";
+}
+
+// console.log(getMovieDetails(1)); // Should print: Baahubali is an Action movie
+// console.log(getMovieDetails(5)); // Should print: Jersey is a Sports movie
+// console.log(getMovieDetails(6)); // Should print: Movie not found
+
+// Q11. Write a function that filters out movies released before a certain year
+// and calculates the average rating of the remaining movies (Rating must be rounded)
+
+const getAverageRatingAfterYear = (samvathsaram) => {
+  const afterYear = movies.filter((x) => x.year > samvathsaram);
+
+  if (afterYear.length === 0) {
+    return "No movies after the specified year";
+  }
+  const totalRating = afterYear.reduce(
+    (acc, curr) => acc + curr.ratings.reduce((a, b) => a + b, 0),
+    0
+  );
+  const averageRating = Math.round(
+    totalRating / afterYear.reduce((acc, curr) => acc + curr.ratings.length, 0)
+  );
+  return `The average rating of movies after ${samvathsaram} is ${averageRating}`;
+};
+
+console.log(getAverageRatingAfterYear(2016)); // Should print: 8.83 (average rating of Arjun Reddy, Mahanati, and Jersey)
+console.log(getAverageRatingAfterYear(2020)); // Should print: No movies after the specified year
+
+// Q12: Write a function that checks if all movies of a certain genre have
+// ratings above a certain value
+
+const allRatingsAboveForGenre = (ratings, genere) => {
+  const genreMovies = movies.filter((x) => x.genre === genere);
+  const allAboveRatings = genreMovies.every((movie) =>
+    movie.ratings.every((rating) => rating > ratings)
+  );
+  return allAboveRatings
+    ? `Yes, all ${genere} movies are above ${ratings} ratings`
+    : `No, not all ${genere} movies are above ${ratings} ratings`;
+};
+
+console.log(allRatingsAboveForGenre(7, "Action")); // Should print: Yes, all Action movies are above 7 ratings
+console.log(allRatingsAboveForGenre(8, "Biography")); // Should print: No, not all Biography movies are above 8 ratings
+
+// Q13: Write a function that returns a string with each movie's title and
+// its ratings joined by commas
+function getTitlesAndRatings() {
+  console.log(
+    movies.reduce(
+      (acc, curr) => console.log(`${curr.title}: ${curr.ratings} |`),
+      0
+    )
+  );
+}
+console.log(getTitlesAndRatings());
+// Should print: Baahubali: 8, 9, 10 | Arjun Reddy: 9, 8, 9 | Mahanati: 10, 9, 8 |
+//  Eega: 7, 8, 9 | Jersey: 9, 9, 8
+
+// Q14: Write a function that returns a single array containing all ratings of all movies
+
+function getAllRatings() {
+  return movies.reduce((acc, curr) => acc.concat(curr.ratings), []);
+}
+console.log(getAllRatings());
+// Should print: [8, 9, 10, 9, 8, 9, 10, 9, 8, 7, 8, 9, 9, 9, 8]
+
+// Q15: Write a function that returns an array of titles of movies that have
+// ratings above a certain threshold in any rating
+const getTitlesWithHighRatings = (rating) => {
+  return movies
+    .filter((x) => x.ratings.some((rat) => rat >= rating))
+    .map((x) => x.title);
+};
+// console.log(getTitlesWithHighRatings(9)); // Should print: ["Baahubali", "Arjun Reddy", "Mahanati", "Jersey"]
+// console.log(getTitlesWithHighRatings(10)); // Should print: ["Mahanati"]
+
+// Q16: Write a function that returns an array of movie titles sorted by their
+// average ratings in descending order
+const getTitlesSortedByAverageRating = () => {
+  return movies
+    .map((movie) => ({
+      title: movie.title,
+      avgRating:
+        movie.ratings.reduce((acc, curr) => acc + curr, 0) /
+        movie.ratings.length,
+    }))
+    .sort((x, y) => y.avgRating - x.avgRating)
+    .map((x) => x.title);
+};
+console.log(getTitlesSortedByAverageRating()); // Should print: ["Baahubali", "Arjun Reddy", "Jersey", "Mahanati", "Eega"]
+
+// Q17: Write a function that finds the movie with the highest average rating and
+// returns its title
+
+const getMovieWithHighestAverageRating = () => {
+  return movies
+    .map((movie) => ({
+      title: movie.title,
+      avgRating:
+        movie.ratings.reduce((acc, curr) => acc + curr, 0) /
+        movie.ratings.length,
+    }))
+    .sort((x, y) => y.avgRating - x.avgRating)
+    .map((x) => x.title)[0];
+};
+
+console.log(getMovieWithHighestAverageRating()); // Should print: Baahubali
+
+// Q18: Write a function that returns an array of movie titles released after a
+// certain year
+const getTitlesAfterYear = (samvathsaram) => {
+  return movies.filter((x) => x.year > samvathsaram).map((x) => x.title);
+};
+
+console.log(getTitlesAfterYear(2015)); // Should print: ["Arjun Reddy", "Mahanati", "Jersey"]
+console.log(getTitlesAfterYear(2018)); // Should print: ["Jersey"]
+
+// Q19: Write a function that finds a movie by its title and returns a formatted string
+// with its director and year
+
+const getMovieInfoByTitle = (title) => {
+  const [movie] = movies.filter((u) => u.title === title);
+  return movie
+    ? `${movie.title} directed by ${movie.director}`
+    : "Movie not found";
+};
+
+console.log(getMovieInfoByTitle("Baahubali")); // Should print: Baahubali directed by S. S. Rajamouli was released in 2015
+console.log(getMovieInfoByTitle("Jersey")); // Should print: Jersey directed by Gowtam Tinnanuri was released in 2019
+console.log(getMovieInfoByTitle("Avatar")); // Should print: Movie not found
+
+// Q20: Write a function that returns an array of titles of movies that have at least
+// one rating below a certain threshold
+
+const getTitlesWithLowRatings = (rating) => {
+  return movies
+    .filter((x) => x.ratings.some((rat) => rat < rating))
+    .map((x) => x.title);
+};
+
+console.log(getTitlesWithLowRatings(8)); // Should print: ["Eega"]
+console.log(getTitlesWithLowRatings(9)); // Should print: ["Baahubali", "Mahanati", "Eega", "Jersey"]
+
+// Q21: Write a function that calculates the total number of ratings for movies
+// of a specific genre
+
+const getTotalRatingsByGenre = (genre) => {
+  return movies
+    .filter((x) => x.genre == genre)
+    .reduce((acc, curr) => acc + curr.ratings.length, 0);
+};
+
+console.log(getTotalRatingsByGenre("Action")); // Should print: 3
+console.log(getTotalRatingsByGenre("Drama")); // Should print: 3
