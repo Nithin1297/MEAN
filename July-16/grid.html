@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>July 16</title>
+    <style>
+      /* combinators - > child selector */
+      .container > div {
+        background: pink;
+        border: 2px solid black;
+        height: 100px;
+        width: 100px;
+      }
+
+      .container {
+        display: grid;
+        /* grid-template-columns: repeat(12,1fr); */
+        grid-template-columns: 1fr;
+        /* repeat autofit minmax (RAM) */
+        /* grid-template-columns: repeat(autofit,minmax(200px,1fr)); */
+      }
+
+      @media (min-width: 600px) {
+        .container {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+  </body>
+</html>

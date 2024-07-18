@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom</title>
+  </head>
+  <body>
+    <h1>CSS is awesome!!! 😒</h1>
+    <h1>CSS is not Fun!!</h1>
+
+    <span id="highlight">Nikhil loves Nikhila</span>
+
+    <h2 class="fun">Hobbies</h2>
+    <h2 class="fun">Dreames</h2>
+    <p class="fun">Woww!!</p>
+    <!-- super cool -->
+
+    <ul class="languages">
+      <li>JS</li>
+      <li>SQL</li>
+    </ul>
+
+    <h3>Hobbies</h3>
+    <ul class="hobbies"></ul>
+
+    <input class="username" type="text" />
+
+    <script>
+      const headings = document.getElementsByTagName("h1");
+      console.log(headings[0].innerText); // Read
+      headings[0].innerText = "CSS is good!!!"; // Update // Data is coming from database
+      console.log(headings[0].innerText);
+
+      const Nikhil = document.getElementById("highlight");
+      console.log(Nikhil.innerText);
+
+      //   const para = document.getElementsByTagName("p"); // Read
+      //   para.innerText = "Super Text"; // Update
+      //   console.log(para.innerText);
+
+      document.getElementsByClassName("fun")[2].innerText = "Super Text";
+
+      console.log(document.getElementsByClassName("fun"));
+      console.log(document.querySelectorAll(".fun")[2].innerText);
+
+      const heading3 = document.createElement("h3");
+      heading3.innerText = "We are from proclink";
+      console.log(heading3.innerText);
+      document.querySelector("body").append(heading3);
+      //   document.body.append(heading3);
+
+      console.log(document.querySelector(".languages").innerHTML);
+      console.log(document.querySelector(".languages").innerText);
+
+      //   document.querySelector(
+      //     ".languages"
+      //   ).innerText = `<li>CSS</li><li>HTML</li>`;
+
+      document.querySelector(
+        ".languages"
+      ).innerHTML = `<li>CSS</li><li>HTML</li>`;
+
+      console.log(document.querySelector(".languages").innerHTML);
+
+      const hobbiesData = [
+        "Reading",
+        "Painting",
+        "Photography",
+        "Hiking",
+        "Gardening",
+        "Cooking",
+        "Playing musical instruments",
+        "Dancing",
+        "Traveling",
+        "Knitting",
+      ];
+
+      document.querySelector(".hobbies").innerHTML = hobbiesData
+        .map((x) => `<li>${x}</li>`)
+        .join("");
+      console.log(hobbiesData.map((x) => `<li>${x}</li>`).join(""));
+
+      hobbiesData.forEach((hobbieData) => {
+        const list = document.createElement("li");
+        list.innerText = hobbieData;
+
+        document.querySelector(".hobbies").append(list);
+      });
+      //   console.log(list);
+
+      document
+        .querySelector(".username")
+        .setAttribute("placeholder", "Enter Username");
+
+      document.querySelector(".username").setAttribute("style", "color : pink");
+    </script>
+  </body>
+</html>

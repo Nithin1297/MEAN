@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        display: grid;
+        min-height: 100vh;
+        place-content: center;
+      }
+      h1 {
+        color: skyblue;
+        font-family: sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <ol class="lists"></ol>
+
+    <h1 id="seconds"></h1>
+    <script>
+      const time = document.getElementById("seconds");
+      setTimeout(() => {
+        time.innerHTML = "10";
+        setTimeout(() => {
+          time.innerHTML = "9";
+          setTimeout(() => {
+            time.innerHTML = "8";
+            setTimeout(() => {
+              time.innerHTML = "7";
+              setTimeout(() => {
+                time.innerHTML = "6";
+                setTimeout(() => {
+                  time.innerHTML = "5";
+                  setTimeout(() => {
+                    time.innerHTML = "4";
+                    setTimeout(() => {
+                      time.innerHTML = "3";
+                      setTimeout(() => {
+                        time.innerHTML = "2";
+                        setTimeout(() => {
+                          time.innerHTML = "1";
+                          setTimeout(() => {
+                            time.innerHTML = "Tomorrow is Holiday!!🤩";
+                          }, 1000);
+                        }, 1000);
+                      }, 1000);
+                    }, 1000);
+                  }, 1000);
+                }, 1000);
+              }, 1000);
+            }, 1000);
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    </script>
+    <script src="./promise.js"></script>
+  </body>
+</html>
