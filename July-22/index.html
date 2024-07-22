@@ -1,11 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-</body>
+    <style>
+      body {
+        font-family: Roboto;
+        background-image: linear-gradient(
+          to right top,
+          #d33472,
+          #f5534d,
+          #fa8518,
+          #e1ba00,
+          #a8eb12
+        );
+        min-height: 100vh;
+      }
+
+      .user-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .add-user-form > button,
+      .add-user-form > input {
+        width: 50%;
+      }
+
+      .user-container {
+        display: flex;
+        gap: 1rem;
+        background: white;
+        padding: 0.5rem;
+        border-radius: 0.4rem;
+        align-items: center;
+        box-shadow: 3px 3px 10px 0px rgba(50, 50, 50, 0.1);
+        transition: 0.2s;
+        min-width: 20rem;
+      }
+
+      .user-container:hover {
+        transform: scale(1.1);
+      }
+
+      .user-container > img {
+        height: 5rem;
+        width: 5rem;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .user-name {
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .user-joined {
+        font-size: 0.8rem;
+        color: grey;
+      }
+
+      .user-delete {
+        font-size: 0.8rem;
+      }
+
+      .edit-user-form,
+      .add-user-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        margin: 1rem 0;
+        align-items: stretch;
+      }
+
+      .add-user-form > button,
+      .add-user-form > input {
+        width: 50%;
+      }
+
+      .edit-user-form {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="add-User-form">
+      <label for="uname">UserName</label>
+      <input id="uname" type="text" placeholder="User name" />
+      <label for="pic">Profile Pic</label>
+      <input id="pic" type="text" placeholder="https://abc.xyz" />
+      <button onclick="addUser()">➕ Add User</button>
+    </div>
+    <div class="user-list"></div>
+
+    <script>
+      const API = "https://669a42859ba098ed61fef71c.mockapi.io";
+
+      function addUser() {
+        // create and refresh
+        const username = document.querySelector("#uname").value;
+        const profilePic = document.querySelector("#pic").value;
+        fetch(`${API}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            profilePic,
+          }),
+        })
+          .then((res) => res.json())
+          .then(() => loadUsers());
+      }
+
+      function addUserToView(user) {
+        document.querySelector(
+          ".user-list"
+        ).innerHTML += `<div class="user-container">
+                      <img
+                        src="${user.avatar}"
+                        alt="${user.name}"
+                      />
+                      <div class="user-details">
+                        <p class="user-name">${user.name}</p>
+                        <p class="user-joined">${user.createdAt}</p>
+                        <button onclick="deleteUser(${user.id})">Delete</button>
+                        </div>
+                    </div>`;
+      }
+
+      //   Delete and Refresh
+      function deleteUser(id) {
+        console.log("Deleting User....", id);
+        fetch(`${API}/users/${id}`, { method: "DELETE" })
+          .then((res) => res.json())
+          .then(() => loadUsers());
+      }
+
+      function displayAllUsers(users) {
+        document.querySelector(".user-list").innerHTML = "";
+        users.forEach((user) => addUserToView(user));
+        // addUserToView(users)
+      }
+
+      function loadUsers() {
+        fetch(`${API}/users`)
+          .then((res) => res.json())
+          .then((users) => displayAllUsers(users));
+      }
+
+      loadUsers();
+    </script>
+  </body>
 </html>
