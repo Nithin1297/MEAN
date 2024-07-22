@@ -46,7 +46,7 @@
     </style>
   </head>
   <body>
-    <script>
+    <script type="module">
       // let countriesInfo = [
       //   {
       //     name: "India",
@@ -118,19 +118,31 @@
         discriptionDiv.appendChild(head4);
       }
 
-      fetch("https://restcountries.com/v3.1/all")
-        .then((res) => res.json())
-        .then((data) =>
-          data.map((x) =>
-            addFlagToScreen(
-              x.name.common,
-              x.population,
-              x.region,
-              x.flags.svg,
-              x.capital
-            )
-          )
-        );
+      const res = await fetch("https://restcountries.com/v3.1/all");
+      const country = await res.json();
+      country.map((x) =>
+        addFlagToScreen(
+          x.name.common,
+          x.population,
+          x.region,
+          x.flags.svg,
+          x.capital
+        )
+      );
+
+      // fetch("https://restcountries.com/v3.1/all")
+      //   .then((res) => res.json())
+      //   .then((data) =>
+      //     data.map((x) =>
+      //       addFlagToScreen(
+      //         x.name.common,
+      //         x.population,
+      //         x.region,
+      //         x.flags.svg,
+      //         x.capital
+      //       )
+      //     )
+      //   );
     </script>
   </body>
 </html>

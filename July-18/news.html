@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News</title>
+    <style>
+      .card-container {
+        border-radius: 15px;
+        padding: 10px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        overflow: hidden;
+        box-shadow: 0px 0px 5px 5px rgb(93, 86, 86);
+      }
+      .title {
+        font-family: "Times New Roman", Times, serif;
+      }
+      .image {
+        height: 200px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 10px 10px;
+        margin-bottom: 0;
+      }
+      .discription {
+        display: flex;
+        flex-direction: column;
+        font-family: "Times New Roman", Times, serif;
+      }
+
+      body {
+        background: whitesmoke;
+        margin: 0;
+        display: grid;
+        place-content: center;
+        gap: 40px;
+      }
+      .end {
+        border: none;
+        border-top: 1px solid #281818;
+        margin: 10px 0;
+      }
+      h6,
+      h5 {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <h1>NEWS</h1>
+    <div class="card-container">
+      <div class="title">
+        <h3>
+          Details Of India Coach Gautam Gambhir's 1st Meeting With BCCI
+          Selectors: \"Robust Exchange Of...\" - NDTV Sports
+        </h3>
+      </div>
+      <div class="image"></div>
+      <div class="discription">
+        <h5>NDTV Sports Desk</h5>
+        <h6>2024-07-17T13:35:52Z</h6>
+        <p>
+          The report claimed that Gambhir gave his inputs for the team for the
+          upcoming limited overs tour of Sri Lanka
+        </p>
+      </div>
+    </div> -->
+    <script>
+      const mainDiv = document.createElement("div");
+      mainDiv.classList.add("card-container");
+      document.body.appendChild(mainDiv);
+
+      function printNews(newstitle, image, author, time, description) {
+        const titleDiv = document.createElement("div");
+        titleDiv.classList.add("title");
+        mainDiv.appendChild(titleDiv);
+
+        const title = document.createElement("h3");
+        title.innerText = newstitle;
+        titleDiv.appendChild(title);
+
+        if (image) {
+          const imgDiv = document.createElement("div");
+          imgDiv.classList.add("image");
+          imgDiv.style.backgroundImage = `url(${image})`;
+          mainDiv.appendChild(imgDiv);
+        }
+
+        const descriptionDiv = document.createElement("div");
+        descriptionDiv.classList.add("discription");
+        mainDiv.appendChild(descriptionDiv);
+
+        if (author) {
+          const head5 = document.createElement("h5");
+          head5.innerText = author;
+          descriptionDiv.appendChild(head5);
+        }
+
+        const head6 = document.createElement("h6");
+        head6.innerText = time;
+        descriptionDiv.appendChild(head6);
+
+        if (description) {
+          const para = document.createElement("p");
+          para.innerText = description;
+          descriptionDiv.appendChild(para);
+        }
+
+        const endDiv = document.createElement("div");
+        endDiv.classList.add("end");
+        mainDiv.appendChild(endDiv);
+      }
+
+      fetch(
+        "https://newsapi.org/v2/top-headlines?country=in&apiKey=cda86e36f8e14d8c8ec3b23e86e39c8e&from=2024-07-18&category=entertainment"
+      )
+        .then((res) => res.json())
+        .then((data) =>
+          data.articles.map((x) =>
+            printNews(
+              x.title,
+              x.urlToImage,
+              x.author,
+              x.publishedAt,
+              x.description
+            )
+          )
+        );
+    </script>
+
+    <!-- <script>
+      
+      fetch(
+        "https://newsapi.org/v2/top-headlines?country=in&apiKey=df1da69e9a744ca4a12ce2dfda7d7b03"
+      )
+        .then((res) => res.json())
+        .then((data) =>
+          data.articles
+        );
+    </script> -->
+  </body>
+</html>

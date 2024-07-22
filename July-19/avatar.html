@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avatar</title>
+  </head>
+  <body>
+    div
+    <script>
+      const profile = {
+        createdAt: "2024-07-19T04:13:55.382Z",
+        name: "Monica Corkery",
+        avatar:
+          "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1059.jpg",
+        id: "1",
+      };
+      fetch("https://669a42859ba098ed61fef71c.mockapi.io/users")
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    </script>
+  </body>
+</html>

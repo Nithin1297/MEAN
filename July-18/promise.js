@@ -52,16 +52,19 @@ var drivingEligibilityTest = new Promise((resolve, reject) => {
 //     const names = data.map((n) => n.name.common);
 //     console.log(names);
 //   });
+// function getCountriesByPopulation() {
+//   fetch("https://restcountries.com/v3.1/all")
+//     .then((res) => res.json())
+//     .then((data) => {
+//       const names = data
+//         .filter((x) => x.population > 10000000)
+//         .sort((a, b) => b.population - a.population)
+//         .map((n) => n.name.common);
+//       console.log(names);
+//     });
+// }
 
-// fetch("https://restcountries.com/v3.1/all")
-//   .then((res) => res.json())
-//   .then((data) => {
-//     const names = data
-//       .filter((x) => x.population > 10000000)
-//       .sort((a, b) => b.population - a.population)
-//       .map((n) => n.name.common);
-//     console.log(names);
-//   });
+// console.log(getCountriesByPopulation());
 
 // fetch("https://restcountries.com/v3.1/all")
 //   .then((res) => res.json())
@@ -105,3 +108,4 @@ var drivingEligibilityTest = new Promise((resolve, reject) => {
 //       .join("");
 //     console.log(names);
 //   });
+

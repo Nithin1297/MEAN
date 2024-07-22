@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather</title>
+  </head>
+  <body>
+    <script>
+        var cities = ["chennai", "madurai", "erode"];
+
+        // var result = {
+        //   chennai: 29.0,
+        //   madurai: 32.0,
+        //   erode: 28.0,
+        // };
+        async function weather(city) {
+          const res = await fetch(
+            `http://api.weatherapi.com/v1/current.json?key=263fd3c6d50b422f8b771310241907&q=${city}&aqi=no`,
+            { mode: "cors" }
+          )
+            const data = await res.json()
+            return [data?.location?.name, data?.current?.temp_c];
+        }
+
+      const values = await Promise.all(cities.map(weather));
+      console.log(Object.fromEntries(values))
+    </script>
+  </body>
+</html>
