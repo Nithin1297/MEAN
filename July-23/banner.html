@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner</title>
+    <link rel="stylesheet" href="./banner.css" />
+  </head>
+  <body>
+    <div class="banner">
+      <div class="banner-content">
+        <button onclick="left()">👈</button>
+        <h1>Welcome to Our Website</h1>
+        <button onclick="right()">👉</button>
+      </div>
+    </div>
+
+    <script>
+      const images = [
+        'url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg?cs=srgb&dl=pexels-padrinan-255379.jpg")',
+        'url("https://static.vecteezy.com/system/resources/thumbnails/026/365/937/small_2x/beautiful-blurred-green-nature-background-ai-generated-photo.jpg")',
+        'url("https://plus.unsplash.com/premium_photo-1673306778968-5aab577a7365?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YmFja2dyb3VuZCUyMGltYWdlfGVufDB8fDB8fHww.jpg")',
+      ];
+
+      const bannerImages = images.map((image, index) => {
+        const div = document.createElement("div");
+        div.className = "banner-image";
+        div.style.backgroundImage = image;
+        if (index === 0) div.classList.add("active"); // Set the first image as active
+        document.querySelector(".banner").appendChild(div);
+        return div;
+      });
+
+      let currentIndex = 0;
+
+      function changeImage() {
+        bannerImages[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % bannerImages.length; // Loop back to the first image
+        bannerImages[currentIndex].classList.add("active");
+      }
+      // Change image every 3 seconds
+      setInterval(changeImage, 2000);
+
+      function left() {
+        currentIndex = currentIndex - 1;
+        bannerImages[currentIndex].classList.add("active");
+      }
+      function right() {
+        currentIndex = currentIndex + 1;
+        bannerImages[currentIndex].classList.add("active");
+      }
+    </script>
+  </body>
+</html>
